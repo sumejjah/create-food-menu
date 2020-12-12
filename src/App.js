@@ -7,8 +7,6 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import ErrorPage from './components/ErrorPage';
 
-import './App.css';
-
 function App() {
   return (
     <AuthWrapper>
