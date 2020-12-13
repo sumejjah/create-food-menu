@@ -2,19 +2,20 @@ import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import { GithubContext } from '../../../../context/context';
+// import { GithubContext } from '../../../../context/context';
 
-const Search = () => {
+const Search = ({onSearchSubmit}) => {
   const [searchValue, setSearchValue ] = useState('');
-  const { searchUser } = useContext(GithubContext);
+  // const { searchUser } = useContext(GithubContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    searchUser(searchValue);
+    onSearchSubmit(searchValue);
+    // searchUser(searchValue);
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Wrapper>
         <Form.Control
           type="text"
@@ -24,7 +25,7 @@ const Search = () => {
         />
         <Button type="submit" variant="info">Search</Button>
       </Wrapper>
-    </Form>
+    </form>
   );
 };
 

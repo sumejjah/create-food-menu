@@ -1,18 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const ErrorPage = () => (
   <Wrapper>
-    <Title>
-      Oops!
-    </Title>
-    <Message>
-      We can't seem to find the page you're looking for.
-    </Message>
-    <Link to="/">
-      Go to dashboard
-    </Link>
+    <Title>Oops!</Title>
+    <Message>We can't seem to find the page you're looking for.</Message>
+    <Button variant="dark" onClick={() => {}}>Go to dashboard</Button>
   </Wrapper>
 );
 
@@ -24,6 +19,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  a {
+    color: var(--clr-black);
+    margin-top: 30px;
+
+    :hover {
+      text-decoration: none;
+    }
+  }
 `;
 
 const Title = styled.div`

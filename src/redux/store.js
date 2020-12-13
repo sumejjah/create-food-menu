@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { createBrowserHistory } from "history";
+import configureStore from "./configureStore";
 
-export default configureStore({
-  reducer: {
-  }
-});
+export const history = createBrowserHistory();
+
+export default configureStore({}, history);

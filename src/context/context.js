@@ -24,12 +24,15 @@ export const GithubProvider = ({ children }) => {
       pagesize: 30,
     };
 
+    // const response = await axios.get(
+      // `${process.env.REACT_APP_ROOT_URL}/search?app_id=${
+      //   process.env.REACT_APP_APPLICATION_ID
+      // }&app_key=${encodeURIComponent(
+      //   process.env.REACT_APP_API_KEY
+      // )}&q=${searchTerm}`
+    // );
     const response = await axios.get(
-      `${process.env.REACT_APP_ROOT_URL}/search?app_id=${
-        process.env.REACT_APP_APPLICATION_ID
-      }&app_key=${encodeURIComponent(
-        process.env.REACT_APP_API_KEY
-      )}&q=${searchTerm}`
+      `${process.env.REACT_APP_API_URL}/search?q=${searchTerm}`
     );
 
     console.log(response);

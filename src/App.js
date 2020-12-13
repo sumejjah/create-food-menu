@@ -1,16 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 
+import { history } from './redux/store';
 import AuthWrapper from './components/AuthWrapper';
 import PrivateRoute from './components/PrivateRoute';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/Dashboard/components/Dashboard';
 import Login from './components/Login';
 import ErrorPage from './components/ErrorPage';
 
 function App() {
   return (
-    <AuthWrapper>
-      <Router>
+    <ConnectedRouter history={history}>
+      <AuthWrapper>
         <Switch>
           <PrivateRoute path="/" exact>
             <Dashboard />
@@ -22,8 +24,8 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
-      </Router>
-    </AuthWrapper>
+      </AuthWrapper>
+    </ConnectedRouter>
   );
 }
 
