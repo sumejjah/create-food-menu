@@ -4,9 +4,11 @@ import { reducer as form } from "redux-form";
 
 // import mealsReducer from '../components/Dashboard/redux/reducer';
 
-export default (routerHistory) =>
+const rootReducer = (routerHistory) =>
   combineReducers({
     form,
     router: connectRouter(routerHistory),
     // mealsReducer
   });
+
+export default rootReducer;
