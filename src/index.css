@@ -166,3 +166,7 @@ p {
 main {
   padding-bottom: 2rem;
 }
+
+.custom-modal-style {
+  max-width: 600px;
+}

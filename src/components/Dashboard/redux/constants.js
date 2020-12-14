@@ -1,1 +1,2 @@
 export const GET_MEALS = 'GET_MEALS';
+export const DOWNLOAD_RECIPE = 'DOWNLOAD_RECIPE';

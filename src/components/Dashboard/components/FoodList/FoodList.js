@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Container, Row, Col, Badge } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import MealDetailsModal from '../MealDetailsModal';
-
-// import { GithubContext } from "../../../../context/context";
+import BadgeList from '../BadgeList';
+import Loader from '../../../Shared/Loader';
 
 const FoodList = () => {
   const [ modalOpen, setModalOpen ] = useState(false);
@@ -105,11 +105,11 @@ const FoodList = () => {
                 <ItemDetails>
                   <div>
                     <h4>{recipe.label}</h4>
+                    <BadgeList items={recipe.healthLabels}/>                    
                     <div>
-                      {recipe.healthLabels.map((ingredient, index) => (
-                        <BadgeWrapper key={index}>
-                          <Badge variant="info">{ingredient}</Badge>
-                        </BadgeWrapper>
+                      <BoldText>Ingredients:</BoldText>
+                      {recipe.ingredients.map((ingredient, index) => (
+                        <Ingredient key={index}>{ingredient.food}</Ingredient>
                       ))}
                     </div>
                   </div>
@@ -165,22 +165,15 @@ const ItemDetails = styled.div`
   justify-content: space-between;
 `;
 
-const BadgeWrapper = styled.span`
-  :not(:last-child),
-  :not(:first-child) {
-    margin-right: 5px;
-  }
-`;
-
-const ItemImage = styled.img`
-  width: 200px;
-  height: 200px;
-  justify-content: flex-end;
-`;
-
 const BoldText = styled.div`
   font-weight: bold;
   margin-top: 10px;
+`;
+
+const Ingredient = styled.span`
+  &:not(:last-child):after {
+    content: ', '
+  }
 `;
 
 

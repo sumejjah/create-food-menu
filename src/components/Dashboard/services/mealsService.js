@@ -6,7 +6,14 @@ export const getMealsByKeyword = async (params) => {
     params
   );
 
-  console.log(response);
+  return response.data;
+};
+
+export const downloadRecipe = async (params) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_URL}/meal/download`,
+    params
+  );
 
   return response;
-};
+}

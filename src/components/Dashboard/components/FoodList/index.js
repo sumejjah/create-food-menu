@@ -1,3 +1,12 @@
-import FoodList from './FoodList';
+import { connect } from 'react-redux';
 
-export default FoodList;
+import FoodList from './FoodList';
+import { getMealsRequest, getMealsSuccess } from '../../redux/selectors';
+
+
+const mapStateToProps = (state) => ({
+  mealsRequest: getMealsRequest(state),
+  meals: getMealsSuccess(state)
+})
+
+export default connect(mapStateToProps)(FoodList);

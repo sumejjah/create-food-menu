@@ -1,22 +1,28 @@
 import { createAction } from "redux-actions";
-import axios from 'axios';
 
-import { GET_MEALS } from './constants';
+import { DOWNLOAD_RECIPE, GET_MEALS } from './constants';
 
-import { getMealsByKeyword } from '../services/foodSearchService';
+import { getMealsByKeyword, downloadRecipe as downloadRecipeService } from '../services/mealsService';
 
 const getMealsSuccess = createAction(`${GET_MEALS}_SUCCESS`);
 const getMealsFail = createAction(`${GET_MEALS}_FAIL`);
 
 export const getMeals = (keyword) => async(dispatch) => {
   const params = {
-    dataType: ["Survey (FNDDS)"],
-    // dataType: ["Foundation"],
     q: keyword,
     pagesize: 30,
   };
 
-  const response = await getMealsByKeyword(params);
+  const data = await getMealsByKeyword(params);
 
-  dispatch(getMealsSuccess({response}));
+  dispatch(getMealsSuccess({data}));
 }
+
+const downloadSuccess = createAction(`${DOWNLOAD_RECIPE}_SUCCESS`);
+const downloadFail = createAction(`${DOWNLOAD_RECIPE}_FAIL`);
+
+export const downloadRecipe = (params) => async (dispatch) => {
+  const result = await downloadRecipeService(params);
+
+  dispatch(downloadSuccess({ result }));
+} 

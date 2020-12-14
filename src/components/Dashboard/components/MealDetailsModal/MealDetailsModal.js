@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Modal, Button, FormControl } from "react-bootstrap";
-import { connect } from 'react-redux';
-import fs from 'fs';
-import { Form, Field, reduxForm, FieldArray, Fields, change, untouch } from "redux-form";
+import { Form, Field, reduxForm, FieldArray } from "redux-form";
 import styled from 'styled-components';
 import { MdModeEdit, MdCheck, MdClose } from "react-icons/md";
 
-import RemoveIcon from '../../../../assets/svgs/RemoveIcon.svg';
+import BadgeList from '../BadgeList';
 
 const FieldInput = ({ input, meta, type, placeholder, min, max }) => {
   return (
@@ -26,13 +24,13 @@ class MealDetailsModal extends Component {
     super(props);
 
     this.state = {
-      isEdit: false
-    }
+      isEdit: false,
+    };
   }
 
   toggleFieldArrayEdit = () => {
     const { isEdit } = this.state;
-    this.setState({ isEdit: !isEdit })
+    this.setState({ isEdit: !isEdit });
   };
 
   renderIngredients = ({ fields }) => (
@@ -54,20 +52,22 @@ class MealDetailsModal extends Component {
     </div>
   );
 
-  downloadFormValues = () => {
-    fs.writeFile(
-      "/test.txt",
-      "Cool, I can do this in the browser!",
-      function (err) {
-        fs.readFile("/test.txt", function (err, contents) {
-          console.log(contents.toString());
-        });
-      }
-    );
-  }
+  downloadRecipe = () => {
+    const { download, formValues } = this.props;
+    
+    // download(formValues);
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(formValues, null, 2)], {
+      type: "text/plain",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "myFile.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  };
 
   render() {
-    const { show, handleClose, formValues } = this.props;
+    const { show, handleClose, formValues, meal } = this.props;
     const { isEdit } = this.state;
 
     return (
@@ -76,6 +76,7 @@ class MealDetailsModal extends Component {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        contentClassName="custom-modal-style"
       >
         <Modal.Header closeButton>
           <Modal.Title>Meal details</Modal.Title>
@@ -88,6 +89,8 @@ class MealDetailsModal extends Component {
             component={FieldInput}
             placeholder="Name"
           />
+
+          <BadgeList items={meal.healthLabels} />
 
           <strong>Ingredients</strong>
           {isEdit ? (
@@ -113,7 +116,7 @@ class MealDetailsModal extends Component {
           <Button variant="link" onClick={handleClose}>
             Close
           </Button>
-          <Button onClick={this.downloadFormValues} variant="info">
+          <Button onClick={this.downloadRecipe} variant="info">
             Download
           </Button>
         </Modal.Footer>

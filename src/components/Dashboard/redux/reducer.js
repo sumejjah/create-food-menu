@@ -1,11 +1,5 @@
 import { handleActions } from "redux-actions";
-
-export const Status = {
-  INIT: 0,
-  PENDING: 1,
-  DONE: 2,
-  FAIL: 3,
-};
+import { Status } from '../../../utils/constants'; 
 
 export const initialState = {
   data: null,
@@ -13,34 +7,38 @@ export const initialState = {
   error: null,
 };
 
-export default (prefix, customActionHandlers = {}) =>
+const mealsReducer =
   handleActions(
     {
-      [`${prefix}_REQUEST`]: (state) => ({
+      [`GET_MEALS_REQUEST`]: (state) => ({
         ...state,
         data: null,
         status: Status.PENDING,
         error: null,
       }),
-      [`${prefix}_FAIL`]: (state, action) => ({
+      [`GET_MEALS_FAIL`]: (state, action) => ({
         ...state,
         data: null,
         status: Status.FAIL,
         error: action.payload,
       }),
-      [`${prefix}_SUCCESS`]: (state, action) => ({
-        ...state,
-        data: action.payload.data,
-        status: Status.DONE,
-        error: null,
-      }),
-      [`${prefix}_INIT`]: (state) => ({
+      [`GET_MEALS_SUCCESS`]: (state, action) => {
+        console.log(action);
+        return {
+          ...state,
+          data: action.payload.data,
+          status: Status.DONE,
+          error: null,
+        };
+      },
+      [`GET_MEALS_INIT`]: (state) => ({
         ...state,
         data: null,
         status: Status.INIT,
         error: null,
-      }),
-      ...customActionHandlers,
+      })
     },
     initialState
   );
+
+export default mealsReducer;
