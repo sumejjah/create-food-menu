@@ -1,16 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAuth0 } from "@auth0/auth0-react";
-import { RiArrowDownSLine } from "react-icons/ri";
 import { NavDropdown } from 'react-bootstrap';
 
 const Navbar = () => {
-  const {
-    isAuthenticated,
-    logout,
-    user,
-    isLoading,
-  } = useAuth0();
+  const { isAuthenticated, logout, user } = useAuth0();
   const isUser = isAuthenticated && user;
 
   return (

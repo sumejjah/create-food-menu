@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form as ReduxForm, Field, reduxForm } from "redux-form";
+import { Form, Field, reduxForm } from "redux-form";
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
@@ -16,7 +16,7 @@ const Search = ({onSearchSubmit, invalid}) => {
   }
 
   return (
-    <ReduxForm onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Wrapper>
         <Field
           name="searchKeyword"
@@ -31,7 +31,7 @@ const Search = ({onSearchSubmit, invalid}) => {
           Search
         </Button>
       </Wrapper>
-    </ReduxForm>
+    </Form>
   );
 };
 
@@ -45,6 +45,5 @@ const Wrapper = styled.div`
 `;
 
 export default reduxForm({
-  form: "SearchForm",
-  enableReinitialize: true,
+  form: "SearchForm"
 })(Search);;
