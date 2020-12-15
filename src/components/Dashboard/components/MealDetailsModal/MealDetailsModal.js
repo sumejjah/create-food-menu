@@ -55,15 +55,7 @@ class MealDetailsModal extends Component {
   downloadRecipe = () => {
     const { download, formValues } = this.props;
     
-    // download(formValues);
-    const element = document.createElement("a");
-    const file = new Blob([JSON.stringify(formValues, null, 2)], {
-      type: "text/plain",
-    });
-    element.href = URL.createObjectURL(file);
-    element.download = "myFile.txt";
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
+    download(formValues);
   };
 
   render() {

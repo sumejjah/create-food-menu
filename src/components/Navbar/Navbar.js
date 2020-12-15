@@ -17,11 +17,11 @@ const Navbar = () => {
     <NavbarWrapper>
       {isUser ? (
         <NavDropdown
-          title={`${user.name && `Welcome, ${user.name}!`}`}
+          title={`${user.name && `Welcome, ${user.name} `}`}
           id="nav-dropdown"
           alignRight
         >
-          <NavDropdown.Item eventKey="1.1">
+          <NavDropdown.Item>
             <span
               onClick={() => {
                 logout({ returnTo: window.location.origin });

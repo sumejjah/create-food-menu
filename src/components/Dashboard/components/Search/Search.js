@@ -1,31 +1,37 @@
-import React, { useContext, useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form as ReduxForm, Field, reduxForm } from "redux-form";
+import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
-// import { GithubContext } from '../../../../context/context';
+import FieldInput from '../../../Shared/FieldInput';
+import { required } from '../../../../utils/validators';
 
-const Search = ({onSearchSubmit}) => {
+
+const Search = ({onSearchSubmit, invalid}) => {
   const [searchValue, setSearchValue ] = useState('');
-  // const { searchUser } = useContext(GithubContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearchSubmit(searchValue);
-    // searchUser(searchValue);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <ReduxForm onSubmit={handleSubmit}>
       <Wrapper>
-        <Form.Control
+        <Field
+          name="searchKeyword"
           type="text"
-          placeholder="Search items"
+          component={FieldInput}
+          placeholder="Search meals"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
+          validate={required}
         />
-        <Button type="submit" variant="info">Search</Button>
+        <Button type="submit" variant="info" disabled={invalid}>
+          Search
+        </Button>
       </Wrapper>
-    </form>
+    </ReduxForm>
   );
 };
 
@@ -38,4 +44,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export default Search;
+export default reduxForm({
+  form: "SearchForm",
+  enableReinitialize: true,
+})(Search);;

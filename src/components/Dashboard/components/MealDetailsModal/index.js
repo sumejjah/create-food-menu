@@ -4,10 +4,12 @@ import { getFormValues } from 'redux-form';
 import MealDetailsModal from './MealDetailsModal';
 
 import { downloadRecipe } from '../../redux/actions';
+import { downloadSuccess } from '../../redux/selectors';
 
 const mapStateToProps = (state, { meal }) => ({
   formValues: getFormValues("MealDetails")(state),
-  initialValues: meal
+  initialValues: meal,
+  downloadSuccess: downloadSuccess(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

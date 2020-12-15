@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 
 import MealDetailsModal from '../MealDetailsModal';
 import BadgeList from '../BadgeList';
 import Loader from '../../../Shared/Loader';
 
-const FoodList = () => {
+const FoodList = ({ meals, mealsFail, mealsRequest }) => {
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ currentMeal, setCurrentMeal ] = useState(null);
 
@@ -97,6 +97,12 @@ const FoodList = () => {
         />
       )}
 
+      {!mealsRequest && mealsFail && (
+        <Alert variant='danger'>
+          {mealsFail.message}
+        </Alert>
+      )}
+
       {hits.map(({ recipe }, index) => (
         <ListItem onClick={() => toggleModal(recipe)} key={index}>
           <Container>
@@ -105,7 +111,7 @@ const FoodList = () => {
                 <ItemDetails>
                   <div>
                     <h4>{recipe.label}</h4>
-                    <BadgeList items={recipe.healthLabels}/>                    
+                    <BadgeList items={recipe.healthLabels} />
                     <div>
                       <BoldText>Ingredients:</BoldText>
                       {recipe.ingredients.map((ingredient, index) => (
