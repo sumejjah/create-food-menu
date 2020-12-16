@@ -2,7 +2,7 @@
 Web application using React, Redux, Styled Components, React Bootstrap, Auth0.
 
 ## App URL
-App is available on the following uri: https://create-food-menu.netlify.app
+App is available here: https://create-food-menu.netlify.app
 
 ## What is app about
 A simple project consisted of client created with React.js, Redux and React Bootstrap, and a server done with Node.js and Express. The purpose of the project is to provide a web app which uses Edamam API for searching meal recipes. Each meal could be edited in modal and downloaded to the PC. 
