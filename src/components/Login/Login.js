@@ -39,6 +39,13 @@ const Logo = styled.div`
     width: 500px;
     height: 400px;
   }
-`
+
+  @media (max-width: 770px) {
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+`;
 
 export default Login;

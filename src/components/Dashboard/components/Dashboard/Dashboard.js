@@ -24,6 +24,10 @@ const Dashboard = ({ getMeals }) => {
 
 const ContentWrapper = styled.div`
   margin: 30px 60px;
+
+  @media (max-width: 770px) {
+    margin: 20px;
+  }
 `;
 
 export default Dashboard;

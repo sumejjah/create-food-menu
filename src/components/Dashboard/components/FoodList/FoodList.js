@@ -61,7 +61,9 @@ const FoodList = ({ meals, mealsFail, mealsRequest }) => {
                 <BoldText>Energy: {Math.round(recipe.calories)} kcal</BoldText>
               </ItemDetails>
 
-              <img src={recipe.image} alt={recipe.label} />
+              <span className="image_wrapper">
+                <img src={recipe.image} alt={recipe.label} />
+              </span>
             </ListItem>
           </Col>
         ))}
@@ -89,6 +91,7 @@ const ListItem = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  cursor: pointer;
 
   :nth-child(odd) {
     margin-right: 15px;
@@ -102,6 +105,22 @@ const ListItem = styled.div`
     margin-left: 12px;
     width: 200px;
     height: 200px;
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 770px) {
+    flex-direction: column-reverse;
+    
+    span.image_wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      img {
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+    }
   }
 `;
 
@@ -110,6 +129,10 @@ const ItemDetails = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 770px) {
+    width: 100%;
+  }
 `;
 
 const BoldText = styled.div`

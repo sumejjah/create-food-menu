@@ -45,6 +45,11 @@
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --max-width: 1170px;
   --fixed-width: 620px;
+  --phone: 320px;
+  --large-phone: 480px;
+  --tablet: 770px;
+  --desktop: 1024px;
+  --portal: 1280px;
 }
 /*  Global Styles   */
 
