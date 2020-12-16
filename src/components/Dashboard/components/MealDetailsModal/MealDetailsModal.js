@@ -48,9 +48,10 @@ class MealDetailsModal extends Component {
   );
 
   download = () => {
-    const { download, formValues } = this.props;
+    const { download, formValues, handleClose } = this.props;
 
     download(formValues);
+    handleClose();
   };
 
   render() {
