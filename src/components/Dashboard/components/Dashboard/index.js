@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getMeals: (keyword) => dispatch(getMeals(keyword))
-})
+  getMeals: (keyword) => dispatch(getMeals(keyword)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

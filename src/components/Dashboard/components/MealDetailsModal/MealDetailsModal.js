@@ -48,7 +48,6 @@ class MealDetailsModal extends Component {
   );
 
   download = () => {
-    console.log('pozivam')
     const { download, formValues } = this.props;
 
     download(formValues);
@@ -71,7 +70,7 @@ class MealDetailsModal extends Component {
             <Modal.Title>Meal details</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <strong>Name</strong>
+            <BoldText>Name</BoldText>
             <Field
               name="label"
               type="text"
@@ -80,16 +79,28 @@ class MealDetailsModal extends Component {
               validate={required}
             />
 
-            <BadgeList items={meal.healthLabels} />
+            <BadgeWrapper>
+              <BadgeList items={meal.healthLabels} />
+            </BadgeWrapper>
 
-            <strong>Ingredients</strong>
-            {isEdit ? (
-              <MdCheck onClick={this.toggleFieldArrayEdit} />
-            ) : (
-              <span>
-                <MdModeEdit onClick={this.toggleFieldArrayEdit} />
-              </span>
-            )}
+            <div>
+              <BoldText>Energy: {Math.round(meal.calories)} kcal</BoldText>
+            </div>
+
+            <LabelIcon>
+              <BoldText>Ingredients</BoldText>
+              {isEdit ? (
+                <MdCheck
+                  onClick={this.toggleFieldArrayEdit}
+                  className="default_svg"
+                />
+              ) : (
+                <MdModeEdit
+                  onClick={this.toggleFieldArrayEdit}
+                  className="default_svg"
+                />
+              )}
+            </LabelIcon>
             {isEdit ? (
               <FieldArray
                 name="ingredients"
@@ -106,9 +117,11 @@ class MealDetailsModal extends Component {
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="link" onClick={handleClose}>
-              Close
-            </Button>
+            <LinkButton>
+              <Button variant="link" onClick={handleClose}>
+                Close
+              </Button>
+            </LinkButton>
             <Button onClick={this.download} variant="info" disabled={invalid}>
               Download
             </Button>
@@ -143,9 +156,34 @@ const RemoveIconWrapper = styled.span`
 `;
 
 const LinkButton = styled.div`
-  color: var(--clr-primary-3);
+  color: var(--clr-primary-4);
   display: flex;
   align-items: center;
+  cursor: pointer;
+
+  > button,
+  > button:hover {
+    color: var(--clr-primary-5);
+  }
+`;
+
+const BoldText = styled.div`
+  display: inline-flex;
+  font-weight: bold;
+  margin: 10px 0;
+`;
+
+const BadgeWrapper = styled.div`
+  margin: 10px 0;
+`;
+
+const LabelIcon = styled.div`
+  display: flex;
+  align-items: center;
+
+  > div {
+    margin-right: 10px;
+  }
 `;
 
 export default reduxForm({

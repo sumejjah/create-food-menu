@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const getMealsByKeyword = async (params) => {
   const response = await axios.post(
@@ -16,4 +16,4 @@ export const downloadRecipe = async (params) => {
   );
 
   return response;
-}
+};

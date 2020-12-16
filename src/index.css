@@ -40,6 +40,7 @@
   --transition: all 0.3s linear;
   --spacing: 0.1rem;
   --radius: 0.25rem;
+  --default-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --max-width: 1170px;
@@ -129,4 +130,8 @@ p {
   font-size: 0.875rem;
   border: 2px solid transparent;
   cursor: pointer;
+}
+
+.default_svg {
+  fill: var(--clr-primary-3);
 }

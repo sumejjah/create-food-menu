@@ -10,112 +10,6 @@ const FoodList = ({ meals, mealsFail, mealsRequest }) => {
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ currentMeal, setCurrentMeal ] = useState(null);
 
-  const hits = [
-    {
-      recipe: {
-        calories: 4228.043058200812,
-        healthLabels: [
-          "Sugar-Conscious",
-          "Vegan",
-          "Vegetarian",
-          "Peanut-Free",
-          "Tree-Nut-Free",
-        ],
-        cuisineType: ["italian"],
-        ingredients: [
-          { text: "1/2 cup olive oil", food: "olive oil" },
-          { food: "garlic", text: "5 cloves garlic, peeled" },
-          {
-            food: "russet potatoes",
-            text: "2 large russet potatoes, peeled and cut into chunks",
-          },
-          {
-            food: "chicken",
-            text:
-              "1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)",
-          },
-          { food: "white wine", text: "3/4 cup white wine" },
-          { food: "chicken stock", text: "3/4 cup chicken stock" },
-          { food: "parsley", text: "3 tablespoons chopped parsley" },
-          { food: "dried oregano", text: "1 tablespoon dried oregano" },
-          { food: "Salt", text: "Salt and pepper" },
-          { food: "frozen peas", text: "1 cup frozen peas, thawed" },
-        ],
-        label: "Chicken Vesuvio",
-        image:
-          "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg",
-      },
-    },
-    {
-      recipe: {
-        calories: 3033.2012500008163,
-        healthLabels: [
-          "Vegetarian",
-          "Peanut-Free",
-          "Tree-Nut-Free",
-          "Alcohol-Free",
-        ],
-        cuisineType: ["italian"],
-        ingredients: [
-          { text: "1/2 cup olive oil", food: "olive oil" },
-          { food: "garlic", text: "5 cloves garlic, peeled" },
-          {
-            food: "russet potatoes",
-            text: "2 large russet potatoes, peeled and cut into chunks",
-          },
-          {
-            food: "chicken",
-            text:
-              "1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)",
-          },
-          { food: "white wine", text: "3/4 cup white wine" },
-          { food: "chicken stock", text: "3/4 cup chicken stock" },
-          { food: "parsley", text: "3 tablespoons chopped parsley" },
-          { food: "dried oregano", text: "1 tablespoon dried oregano" },
-          { food: "Salt", text: "Salt and pepper" },
-          { food: "frozen peas", text: "1 cup frozen peas, thawed" },
-        ],
-        label: "Chicken Paprikash",
-        image:
-          "https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg",
-      },
-    },
-    {
-      recipe: {
-        calories: 3033.2012500008163,
-        healthLabels: [
-          "Vegetarian",
-          "Peanut-Free",
-          "Tree-Nut-Free",
-          "Alcohol-Free",
-        ],
-        cuisineType: ["italian"],
-        ingredients: [
-          { text: "1/2 cup olive oil", food: "olive oil" },
-          { food: "garlic", text: "5 cloves garlic, peeled" },
-          {
-            food: "russet potatoes",
-            text: "2 large russet potatoes, peeled and cut into chunks",
-          },
-          {
-            food: "chicken",
-            text:
-              "1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)",
-          },
-          { food: "white wine", text: "3/4 cup white wine" },
-          { food: "chicken stock", text: "3/4 cup chicken stock" },
-          { food: "parsley", text: "3 tablespoons chopped parsley" },
-          { food: "dried oregano", text: "1 tablespoon dried oregano" },
-          { food: "Salt", text: "Salt and pepper" },
-          { food: "frozen peas", text: "1 cup frozen peas, thawed" },
-        ],
-        label: "Chicken Paprikash",
-        image:
-          "https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg",
-      },
-    },
-  ];
-
   const toggleModal = (meal) => {
     setCurrentMeal(meal);
     setModalOpen(!modalOpen);
@@ -137,9 +31,19 @@ const FoodList = ({ meals, mealsFail, mealsRequest }) => {
 
       {mealsRequest && <Loader />}
 
+      {!mealsRequest && !mealsFail && !meals && (
+        <div>Please enter search keyword!</div>
+      )}
+
+      {!mealsRequest && meals && meals.hits && meals.hits.length === 0 && (
+        <div>No recipes found.</div>
+      )}
+
       {!mealsRequest &&
-        hits.map(({ recipe }, index) => (
-          <Col md={6} xs={12} key={index}>
+        meals &&
+        meals.hits &&
+        meals.hits.map(({ recipe }, index) => (
+          <Col md={12} xs={12} key={index}>
             <ListItem onClick={() => toggleModal(recipe)}>
               <ItemDetails>
                 <div>
@@ -148,7 +52,9 @@ const FoodList = ({ meals, mealsFail, mealsRequest }) => {
                   <div>
                     <BoldText>Ingredients:</BoldText>
                     {recipe.ingredients.map((ingredient, index) => (
-                      <Ingredient key={index}>{ingredient.food}</Ingredient>
+                      <Ingredient key={index}>
+                        {ingredient.food || ingredient.text}
+                      </Ingredient>
                     ))}
                   </div>
                 </div>
@@ -182,6 +88,7 @@ const ListItem = styled.div`
   border: 1px solid var(--clr-grey-7);
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 
   :nth-child(odd) {
     margin-right: 15px;

@@ -33,7 +33,8 @@ const Navbar = () => {
 const NavbarWrapper = styled.div`
   width: 100%;
   height: 52px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid var(--clr-grey-9);
+  box-shadow: var(--default-shadow);
   display: flex;
   justify-content: flex-end;
   align-items: center;
