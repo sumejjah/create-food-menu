@@ -47,7 +47,7 @@ const FoodList = ({ meals, mealsFail, mealsRequest }) => {
             <ListItem onClick={() => toggleModal(recipe)}>
               <ItemDetails>
                 <div>
-                  <h4>{recipe.label}</h4>
+                  <h3>{recipe.label}</h3>
                   <BadgeList items={recipe.healthLabels} />
                   <div>
                     <BoldText>Ingredients:</BoldText>
