@@ -14,7 +14,6 @@ ReactDOM.render(
     clientId={process.env.REACT_APP_CLIENT_ID}
     redirectUri={window.location.origin}
     cacheLocation="localstorage"
-    audience={process.env.REACT_APP_AUTH0_AUDIENCE}
   >
     <Provider store={store}>
       <App />
